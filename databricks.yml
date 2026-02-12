@@ -1,0 +1,63 @@
+# This is a Databricks asset bundle definition for dbx_dab_labs_project.
+# See https://docs.databricks.com/dev-tools/bundles/index.html for documentation.
+bundle:
+  name: dbx-dab-labs
+  uuid: caef5f6a-1cf2-4532-8bf5-ca97a88f03b7
+
+
+include:
+  - resources/citibike_etl_pipeline_nb.job.yml
+  - resources/citibike_etl_pipeline_py.job.yml
+  - resources/citibike_etl_pipeline.dlt.yml
+  - resources/clusters.yml
+
+variables:
+  environment: 
+    default: "dev"
+  region: 
+    default: "au"
+  dev_flag:
+    default: true
+
+
+
+
+
+targets:
+  dev:
+    mode: development
+    default: true
+    workspace:
+      host: https://adb-7405618758331967.7.azuredatabricks.net/
+  
+  uat:
+    mode: production
+    variables:
+      environment: "uat"
+      region: "au"
+      dev_flag: false
+    presets:
+      name_prefix: "[${bundle.target}] "
+    workspace:
+      host: https://adb-7405609839592020.0.azuredatabricks.net/
+      root_path: /Workspace/Shared/.bundle/${bundle.name}/${bundle.target}
+    permissions:
+      - user_name: rafeed.sultaan@tlconsulting.com.au
+        level: CAN_MANAGE
+    run_as:
+      user_name: rafeed.sultaan@tlconsulting.com.au
+
+  prod:
+    mode: production
+    variables:
+      environment: "uat"
+      region: "au"
+      dev_flag: false
+    workspace:
+      host: https://adb-7405605217831521.1.azuredatabricks.net/
+      root_path: /Workspace/Shared/.bundle/${bundle.name}/${bundle.target}
+    permissions:
+      - user_name: rafeed.sultaan@tlconsulting.com.au
+        level: CAN_MANAGE
+    run_as:
+      user_name: rafeed.sultaan@tlconsulting.com.au

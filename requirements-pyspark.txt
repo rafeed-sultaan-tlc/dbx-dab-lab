@@ -1,0 +1,8 @@
+pyspark==3.5.0
+py4j==0.10.9.7
+pandas==1.5.3
+pyarrow==14.0.1
+numpy==1.23.5
+grpcio==1.60.0
+grpcio-status==1.60.0
+googleapis-common-protos==1.63.2

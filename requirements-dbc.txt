@@ -1,0 +1,4 @@
+databricks-cli==0.14.3
+databricks-connect==15.4
+wheel
+setuptools
