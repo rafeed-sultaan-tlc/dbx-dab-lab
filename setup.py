@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='dbx-dab-labs',
-    version='0.0.1',
+    version='0.0.2',
     description='This contains the code in the ./src directory of the project',
     author='Rafeed Sultaan',
     packages = find_packages(where='./src'),

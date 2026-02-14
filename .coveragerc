@@ -1,0 +1,7 @@
+[run]
+omit = 
+    #any files or globs you want to exclude
+    src/dbx_dab_labs/*.py
+    src/__init__.py
+    src/*/__init__.py
+    
