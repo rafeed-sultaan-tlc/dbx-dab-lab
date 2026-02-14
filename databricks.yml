@@ -57,7 +57,7 @@ targets:
       host: https://adb-7405605217831521.1.azuredatabricks.net/
       root_path: /Workspace/Shared/.bundle/${bundle.name}/${bundle.target}
     permissions:
-      - user_name: rafeed.sultaan@tlconsulting.com.au
+      - service_principal_name: 784bebc7-a593-4ddc-972a-12973f10f73b
         level: CAN_MANAGE
     run_as:
-      user_name: rafeed.sultaan@tlconsulting.com.au
+      service_principal_name: 784bebc7-a593-4ddc-972a-12973f10f73b
