@@ -41,13 +41,13 @@ jobs:
       - name: Deploy to UAT
         run: |
           databricks bundle deploy \
-            --target uat
-            --profile uat
-            --var='environment=uat'
+            --target uat \
+            --profile uat \
+            --var='environment=uat' \
             --var='region=au'
 
   cd-deploy-prod:
-    name: Deploy to UAT
+    name: Deploy to prod
     runs-on: ubuntu-latest
     environment: prod
     steps:
@@ -81,9 +81,7 @@ jobs:
     - name: Deploy to prod
       run: |
         databricks bundle deploy \
-          --target prod
-          --profile prod
-          --var='environment=uat'
+          --target prod \
+          --profile prod \
+          --var='environment=prod' \
           --var='region=au'
-  
-    
