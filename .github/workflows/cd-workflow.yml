@@ -1,0 +1,86 @@
+name: CD Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  cd-deploy-uat:
+    name: Deploy to UAT
+    runs-on: ubuntu-latest
+    environment: uat
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install Depedencies
+        run: |
+          pip install --upgrade pip
+          pip install setuptools wheel
+
+      - name: Configure Databricks
+        run: |
+          # Write out the profile (here called 'UAT')
+          cat <<EOF > ~/.databrickscfg
+          [uat]
+          host  = https://adb-7405609839592020.0.azuredatabricks.net/
+          azure_tenant_id = ${{ secrets.AZURE_TENANT_ID }}
+          azure_client_id = ${{ secrets.AZURE_CLIENT_ID }}
+          azure_client_secret = ${{ secrets.AZURE_CLIENT_SECRET }}
+          EOF
+
+      - name: Deploy to UAT
+        run: |
+          databricks bundle deploy \
+            --target uat
+            --profile uat
+            --var='environment=uat'
+            --var='region=au'
+
+  cd-deploy-prod:
+    name: Deploy to UAT
+    runs-on: ubuntu-latest
+    environment: prod
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Install Databricks CLI
+      run: curl -fsSL https://raw.githubusercontent.com/databricks/setup-cli/main/install.sh | sh
+
+    - name: Install Depedencies
+      run: |
+        pip install --upgrade pip
+        pip install setuptools wheel
+
+    - name: Configure Databricks
+      run: |
+        # Write out the profile (here called 'UAT')
+        cat <<EOF > ~/.databrickscfg
+        [prod]
+        host  = https://adb-7405609839592020.0.azuredatabricks.net/
+        azure_tenant_id = ${{ secrets.AZURE_TENANT_ID }}
+        azure_client_id = ${{ secrets.AZURE_CLIENT_ID }}
+        azure_client_secret = ${{ secrets.AZURE_CLIENT_SECRET }}
+        EOF
+
+    - name: Deploy to UAT
+      run: |
+        databricks bundle deploy \
+          --target prod
+          --profile prod
+          --var='environment=uat'
+          --var='region=au'
+  
+    
