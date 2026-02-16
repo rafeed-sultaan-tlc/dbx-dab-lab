@@ -19,7 +19,10 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install Depedencies
+      - name: Install Databricks CLI
+        uses: databricks/setup-cli@main
+
+      - name: Install Dependencies
         run: |
           pip install --upgrade pip
           pip install setuptools wheel
@@ -57,9 +60,8 @@ jobs:
         python-version: '3.11'
 
     - name: Install Databricks CLI
-      run: |
-        curl -fsSL https://raw.githubusercontent.com/databricks/setup-cli/main/install.sh | sh
-        echo "$HOME/.databricks/bin" >> $GITHUB_PATH
+      uses: databricks/setup-cli@main
+        
     - name: Install Depedencies
       run: |
         pip install --upgrade pip
