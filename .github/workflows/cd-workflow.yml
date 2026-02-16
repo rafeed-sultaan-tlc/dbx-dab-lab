@@ -29,11 +29,11 @@ jobs:
           # Write out the profile (here called 'uat')
           cat <<EOF > ~/.databrickscfg
           [uat]
-host  = https://adb-7405609839592020.0.azuredatabricks.net
-azure_tenant_id = ${{ secrets.AZURE_TENANT_ID }}
-azure_client_id = ${{ secrets.AZURE_CLIENT_ID }}
-azure_client_secret = ${{ secrets.AZURE_CLIENT_SECRET }}
-EOF
+          host  = https://adb-7405609839592020.0.azuredatabricks.net
+          azure_tenant_id = ${{ secrets.AZURE_TENANT_ID }}
+          azure_client_id = ${{ secrets.AZURE_CLIENT_ID }}
+          azure_client_secret = ${{ secrets.AZURE_CLIENT_SECRET }}
+          EOF
 
       - name: Deploy to UAT
         run: |
@@ -67,12 +67,13 @@ EOF
     - name: Configure Databricks
       run: |
         # Write out the profile (here called 'prod')
-        [prod]
-host = https://adb-7405609839592020.0.azuredatabricks.net
-azure_tenant_id = ${{ secrets.AZURE_TENANT_ID }}
-azure_client_id = ${{ secrets.AZURE_CLIENT_ID }}
-azure_client_secret = ${{ secrets.AZURE_CLIENT_SECRET }}
-EOF
+        cat <<EOF > ~/.databrickscfg
+        [uat]
+        host = https://adb-7405609839592020.0.azuredatabricks.net
+        azure_tenant_id = ${{ secrets.AZURE_TENANT_ID }}
+        azure_client_id = ${{ secrets.AZURE_CLIENT_ID }}
+        azure_client_secret = ${{ secrets.AZURE_CLIENT_SECRET }}
+        EOF
 
     - name: Deploy to prod
       run: |
