@@ -38,7 +38,7 @@ jobs:
           azure_client_secret = ${{ secrets.AZURE_CLIENT_SECRET }}
           EOF
 
-      - name: Deploy to UAT
+      - name: Deploy to uat
         run: |
           databricks bundle deploy \
             --target uat \
