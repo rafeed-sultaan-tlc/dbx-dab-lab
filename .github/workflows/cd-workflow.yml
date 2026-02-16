@@ -57,8 +57,9 @@ jobs:
         python-version: '3.11'
 
     - name: Install Databricks CLI
-      run: curl -fsSL https://raw.githubusercontent.com/databricks/setup-cli/main/install.sh | sh
-
+      run: |
+        curl -fsSL https://raw.githubusercontent.com/databricks/setup-cli/main/install.sh | sh
+        echo "$HOME/.databricks/bin" >> $GITHUB_PATH
     - name: Install Depedencies
       run: |
         pip install --upgrade pip
