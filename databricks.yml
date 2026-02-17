@@ -44,7 +44,11 @@ targets:
     permissions:
       - service_principal_name: 1a417522-14dd-4554-977d-617b6cef0da0
         level: CAN_MANAGE
-    run_as:
+      - group_name: users
+        level: VIEW
+      - user_name: ${bundle.deployment.user.name}
+        level: CAN_MANAGE
+    run_as: 
       service_principal_name: 1a417522-14dd-4554-977d-617b6cef0da0
 
   prod:
