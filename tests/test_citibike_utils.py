@@ -1,20 +1,9 @@
 # test_citibike_utils.py
-import os
-import sys
-sys.path.append(os.getcwd())
 
-#Run the test from the root directory
 import datetime
 from src.citibike.citibike_utils import get_trip_duration_mins
-from pyspark.sql import SparkSession
 
-
-#Adjust the sys.path if needed (usually in conftest.py or at the top of your test files)
-
-
-def test_get_trip_duration_mins():
-    # Create a SparkSession for testing
-    spark = SparkSession.builder.getOrCreate()
+def test_get_trip_duration_mins(spark):
 
     data = [
         (datetime.datetime(2025, 4, 10, 10, 0, 0), datetime.datetime(2025, 4, 10, 10, 10, 0)), #10 mins

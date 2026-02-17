@@ -1,9 +1,6 @@
 # test_datetime_utils.py
-
 import datetime
 import src.utils.datetime_utils as datetime_utils
-
-
 
 def test_timestamp_to_date_col(spark):
     # Define data as a list of tuples
